@@ -49,7 +49,6 @@ class Procesador():
 
         self.ventana.mainloop()
 
-
     def primer_movimiento(self, x, y):
 
         """
@@ -77,7 +76,6 @@ class Procesador():
 
         self.movimiento(x,y)
 
-
     def matriz_numero(self):
 
         """
@@ -104,16 +102,17 @@ class Procesador():
 
         return Mnumero
 
-
     def movimiento(self, x, y):
 
         """
-        Recibe las coordenadas de la casilla inicada y lo manifiesta en la matriz de casillas desbloqueadas.
+        Recibe las coordenadas de la casilla inicada y lo manifiesta en la
+        matriz de casillas desbloqueadas.
         En caso de ser una casilla libre llama a la función blanqueo().
         En caso de ser una casilla mina llama a la función fallo().
         Añade uno a la cuenta de movimientos.
-        [En caso de que las casillas desbloqueadas sean iguales al número de casillas menos el número de bombas
-        o las marcas reales ean iguales al número de bombas (pass)]
+        [En caso de que las casillas desbloqueadas sean iguales al número de
+        casillas menos el número de bombas o las marcas reales ean iguales al
+        número de bombas (pass)]
 
         """
 
@@ -137,12 +136,11 @@ class Procesador():
             # self.runing = False
             self.fin_bueno = True
 
-
     def blanqueo(self):
 
         """
-        Recorre la matriz número buscando casillas blancas y desbloqueando su alrededor.
-
+        Recorre la matriz número buscando casillas blancas y desbloqueando su
+        alrededor.
 
         """
 
@@ -176,12 +174,12 @@ class Procesador():
                             else:
                                 print("Algo raro en blanqueo()")
 
-
     def marca(self, x, y):
 
         """
-        Conmuta el elemento de la matriz marcas con las coordenadas recibidas, en caso de ser la coordenada de una
-        casilla bomba lo a ñade a la cuenta de banteras.
+        Conmuta el elemento de la matriz marcas con las coordenadas recibidas,
+        en caso de ser la coordenada de una casilla bomba lo a ñade a la cuenta
+        de banteras.
 
         """
 
@@ -198,7 +196,6 @@ class Procesador():
             else:
                 self.banderas -= 1
 
-
     def fallo(self):
 
         # self.runing = False
@@ -209,57 +206,59 @@ class Procesador():
         self.fin_malo = True
 
 
-
 class VentanaDificultad(tk.Tk):
 
     def __init__(self):
 
         super().__init__()
+
         self.title("Buscaminas - Dificultad")
         self.iconbitmap("mine_icon.ico")
 
-        self.texto_dificultad = tk.Label(self, text="Seleccione nivel de dificultad:", padx=10, pady=10)
-        self.texto_dificultad.pack()
+        texto_dificultad = tk.Label(self, text="Seleccione nivel de dificultad:", padx=10, pady=10)
+        texto_dificultad.pack()
 
-        self.frame_dificultad = tk.Frame(master=self)
-        self.frame_dificultad.pack(padx=40, pady=20)
+        frame_dificultad = tk.Frame(master=self)
+        frame_dificultad.pack(padx=40, pady=20)
 
+        self.init_botones(frame_dificultad)
 
-        self.boton_facil = tk.Button(
-            master = self.frame_dificultad,
+    def init_botones(self, frame_dificultad):
+
+        boton_facil = tk.Button(
+            master = frame_dificultad,
             text = "Fácil",
             width = 30,
             command = lambda: self.selector(1)
         )
-        self.boton_intermedio = tk.Button(
-            master=self.frame_dificultad,
+        boton_intermedio = tk.Button(
+            master=frame_dificultad,
             text="Intermedio",
             width=30,
             command=lambda: self.selector(2)
         )
-        self.boton_dificil = tk.Button(
-            master=self.frame_dificultad,
+        boton_dificil = tk.Button(
+            master=frame_dificultad,
             text="Difícil",
             width=30,
             command=lambda: self.selector(3)
         )
-        self.boton_extremo = tk.Button(
-            master=self.frame_dificultad,
+        boton_extremo = tk.Button(
+            master=frame_dificultad,
             text="Extremo",
             width=30,
             command=lambda: self.selector(4)
         )
-        self.boton_facil.pack()
-        self.boton_intermedio.pack()
-        self.boton_dificil.pack()
-        self.boton_extremo.pack()
+        boton_facil.pack()
+        boton_intermedio.pack()
+        boton_dificil.pack()
+        boton_extremo.pack()
 
+        self.mainloop()
 
     def selector(self, dif):
         self.dificultad = dif
         self.destroy()
-        self.partida = Procesador(self.dificultad)
-
 
 
 class VentanaBuscaminas(tk.Tk):
@@ -555,7 +554,6 @@ class VentanaBuscaminas(tk.Tk):
             self.destroy()
 
 
-
 class VentanaVictoria(tk.Tk):
 
     def __init__(self, dif):
@@ -593,11 +591,3 @@ class VentanaVictoria(tk.Tk):
         self.nombre.set("")
         self.destroy()
         return
-
-
-
-
-
-ventana1 = VentanaDificultad()
-
-ventana1.mainloop()
